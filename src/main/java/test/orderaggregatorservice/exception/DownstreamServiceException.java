@@ -1,6 +1,6 @@
 package test.orderaggregatorservice.exception;
 
-import test.orderaggregatorservice.ErrorMessage;
+import test.orderaggregatorservice.enums.ErrorMessage;
 
 public class DownstreamServiceException extends RuntimeException {
     private final ErrorMessage code;

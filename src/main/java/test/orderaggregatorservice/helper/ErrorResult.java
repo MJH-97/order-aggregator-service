@@ -1,6 +1,6 @@
 package test.orderaggregatorservice.helper;
 
-import test.orderaggregatorservice.ErrorMessage;
+import test.orderaggregatorservice.enums.ErrorMessage;
 
 public record ErrorResult(
         ErrorMessage code,
