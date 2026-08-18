@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import test.orderaggregatorservice.client.OrderSystemClient;
 import test.orderaggregatorservice.dto.CreateCustomerDto;
 import test.orderaggregatorservice.dto.CustomerResponse;
+import test.orderaggregatorservice.dto.OrderResponse;
 import test.orderaggregatorservice.helper.ApiResponse;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,5 +23,12 @@ public class CustomerService {
         CustomerResponse response = orderSystemClient.createCustomer(dto);
         log.info("Customer [{}] created successfully at [{}]", response.getFullName(), response.getCreatedAt());
         return ApiResponse.success(response, HttpStatus.CREATED.value());
+    }
+
+    public ApiResponse<List<OrderResponse>> getCustomerOrders(Long customerId){
+        log.info("Fetching orders for customer [{}] .......", customerId);
+        List<OrderResponse> response = orderSystemClient.getCustomerOrders(customerId);
+        log.info("Returned [{}] orders for customer [{}]", response.size(), customerId);
+        return ApiResponse.success(response, HttpStatus.OK.value());
     }
 }
