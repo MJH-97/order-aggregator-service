@@ -3,12 +3,12 @@ package test.orderaggregatorservice.client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import test.orderaggregatorservice.dto.*;
 import test.orderaggregatorservice.exception.DownstreamServiceException;
 import test.orderaggregatorservice.helper.EndpointUrl;
-import test.orderaggregatorservice.helper.ErrorResult;
 
 import java.util.List;
 
@@ -34,8 +34,8 @@ public class OrderSystemClient {
                 .retrieve()
                 .onStatus(
                         HttpStatusCode::isError,
-                        res -> res.bodyToMono(ErrorResult.class)
-                                .map(error -> new DownstreamServiceException(error.message(), error.code()))
+                        res -> res.bodyToMono(ProblemDetail.class)
+                                .map(error -> new DownstreamServiceException(error.getDetail(), error.getTitle()))
                 )
                 .bodyToMono(OrderResponse.class)
                 .block();
@@ -47,8 +47,8 @@ public class OrderSystemClient {
                 .retrieve()
                 .onStatus(
                         HttpStatusCode::isError,
-                        res -> res.bodyToMono(ErrorResult.class)
-                                .map(error -> new DownstreamServiceException(error.message(), error.code()))
+                        res -> res.bodyToMono(ProblemDetail.class)
+                                .map(error -> new DownstreamServiceException(error.getDetail(), error.getTitle()))
                 )
                 .bodyToFlux(OrderResponse.class)
                 .collectList()
@@ -65,8 +65,8 @@ public class OrderSystemClient {
                 .retrieve()
                 .onStatus(
                         HttpStatusCode::isError,
-                        res -> res.bodyToMono(ErrorResult.class)
-                                .map(error -> new DownstreamServiceException(error.message(), error.code()))
+                        res -> res.bodyToMono(ProblemDetail.class)
+                                .map(error -> new DownstreamServiceException(error.getDetail(), error.getTitle()))
                 )
                 .bodyToMono(responseType)
                 .block();

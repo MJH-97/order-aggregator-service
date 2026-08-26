@@ -1,16 +1,14 @@
 package test.orderaggregatorservice.exception;
 
-import test.orderaggregatorservice.enums.ErrorMessage;
-
 public class DownstreamServiceException extends RuntimeException {
-    private final ErrorMessage code;
+    private final String code;
 
-    public DownstreamServiceException(String message, ErrorMessage code){
+    public DownstreamServiceException(String message, String code){
         super("Error in system service: " + message);
         this.code = code;
     }
 
-    public ErrorMessage getCode() {
+    public String getCode() {
         return code;
     }
 }

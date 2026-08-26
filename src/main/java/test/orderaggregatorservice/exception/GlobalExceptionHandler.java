@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import test.orderaggregatorservice.enums.ErrorMessage;
 import test.orderaggregatorservice.helper.ApiResponse;
 
-import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -17,8 +16,8 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
     @ExceptionHandler(DownstreamServiceException.class)
     public ResponseEntity<ApiResponse<String>> handleDownstreamServiceException(DownstreamServiceException exception){
-        log.error("Failed to connect system service: cause --> [{}], message --> [{}]", exception.getCode().name(), exception.getMessage());
-        String message = "System service error: cause[" + exception.getCode().name() + "], message[" + exception.getMessage() + "]";
+        log.error("Failed to connect system service: cause --> [{}], message --> [{}]", exception.getCode(), exception.getMessage());
+        String message = "System service error: cause[" + exception.getCode() + "], message[" + exception.getMessage() + "]";
         return ResponseEntity.status(502)
                 .body(
                         ApiResponse.failure(message, 502)
