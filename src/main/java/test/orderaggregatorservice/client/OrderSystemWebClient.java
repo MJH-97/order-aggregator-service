@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrderSystemClient {
+public class OrderSystemWebClient {
     private final WebClient orderSystemClient;
 
     public CustomerResponse createCustomer(CreateCustomerDto dto){
