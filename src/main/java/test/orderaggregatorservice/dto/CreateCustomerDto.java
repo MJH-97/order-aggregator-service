@@ -15,7 +15,7 @@ public record CreateCustomerDto(
         String email,
 
         @NotBlank(message = "Customer phone is required")
-        @Pattern(regexp = "^\\\\+[1-9]\\\\d{1,14}$", message = "Invalid phone number")
+        @Pattern(regexp = "^\\+[1-9]\\d{1,14}$", message = "Invalid phone number")
         String phone
 ) {
 }

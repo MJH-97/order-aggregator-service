@@ -1,10 +1,12 @@
 package test.orderaggregatorservice.dto;
 
 import jakarta.validation.constraints.NotNull;
-import test.orderaggregatorservice.enums.OrderStatus;
+import lombok.Data;
+import test.orderaggregatorservice.validation.ValidOrderStatus;
 
-public record UpdateOrderStatusRequest(
+@Data
+public class UpdateOrderStatusRequest{
         @NotNull(message = "Status is required")
-        OrderStatus status
-) {
+        @ValidOrderStatus
+        private String status;
 }

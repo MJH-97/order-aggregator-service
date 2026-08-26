@@ -10,6 +10,7 @@ import test.orderaggregatorservice.dto.OrderResponse;
 import test.orderaggregatorservice.dto.UpdateOrderStatusRequest;
 import test.orderaggregatorservice.helper.ApiResponse;
 
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,7 +25,8 @@ public class OrderService {
     }
 
     public ApiResponse<OrderResponse> updateStatus(UpdateOrderStatusRequest dto, Long orderId){
-        log.info("Updating status of order: id --> [{}], status --> [{}]", orderId, dto.status());
+        dto.setStatus(dto.getStatus().toUpperCase());
+        log.info("Updating status of order: id --> [{}], status --> [{}]", orderId, dto.getStatus());
         OrderResponse response = orderSystemWebClient.updateOrderStatus(dto, orderId);
         log.info("Order [{}] updated to status [{}] successfully", response.getId(), response.getStatus());
         return ApiResponse.success(response, HttpStatus.OK.value());
